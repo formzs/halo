@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
     public static void main(String[] args) {
-        // Customize the spring config location
+        // 自定义 spring 配置位置
         System.setProperty("spring.config.additional-location",
             "optional:file:${user.home}/.halo/,optional:file:${user.home}/halo-dev/");
 

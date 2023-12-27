@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.core.annotation.AliasFor;
 
 /**
- * Cache lock annotation.
+ * 缓存锁注解.
  *
  * @author johnniang
  * @date 3/28/19
@@ -22,7 +22,7 @@ import org.springframework.core.annotation.AliasFor;
 public @interface CacheLock {
 
     /**
-     * Cache prefix, default is ""
+     * 缓存前缀，默认为 ""
      *
      * @return cache prefix
      */
@@ -30,7 +30,7 @@ public @interface CacheLock {
     String prefix() default "";
 
     /**
-     * Alias of prefix, default is ""
+     * 前缀别名，默认为 ""
      *
      * @return alias of prefix
      */
@@ -38,7 +38,7 @@ public @interface CacheLock {
     String value() default "";
 
     /**
-     * Expired time, default is 5.
+     * 过期时间，默认值为 5.
      *
      * @return expired time
      */
@@ -52,23 +52,23 @@ public @interface CacheLock {
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 
     /**
-     * Delimiter, default is ':'
+     * 分隔符，默认为 ':'
      *
      * @return delimiter
      */
     String delimiter() default ":";
 
     /**
-     * Whether delete cache after method invocation.
+     * 方法调用后是否删除缓存。默认为 true
      *
-     * @return true if delete cache after method invocation; false otherwise
+     * @return 如果在方法调用后删除缓存，则为 true;否则为 false
      */
     boolean autoDelete() default true;
 
     /**
-     * Whether trace the request info.
+     * 是否跟踪请求信息。默认为 false
      *
-     * @return true if trace the request info; false otherwise
+     * @return 如果跟踪请求信息，则为 true;否则为 false
      */
     boolean traceRequest() default false;
 }

@@ -16,7 +16,7 @@ import run.halo.app.exception.ServiceException;
 import run.halo.app.utils.ServletUtils;
 
 /**
- * Interceptor for cache lock annotation.
+ * 缓存锁注解的拦截器.
  *
  * @author johnniang
  * @date 3/28/19
@@ -38,22 +38,22 @@ public class CacheLockInterceptor {
 
     @Around("@annotation(run.halo.app.cache.lock.CacheLock)")
     public Object interceptCacheLock(ProceedingJoinPoint joinPoint) throws Throwable {
-        // Get method signature
+        // 获取方法签名
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
         log.debug("Starting locking: [{}]", methodSignature.toString());
 
-        // Get cache lock
+        // 获取缓存锁
         CacheLock cacheLock = methodSignature.getMethod().getAnnotation(CacheLock.class);
 
-        // Build cache lock key
+        // 构建缓存锁定键
         String cacheLockKey = buildCacheLockKey(cacheLock, joinPoint);
 
         log.debug("Built lock key: [{}]", cacheLockKey);
 
 
         try {
-            // Get from cache
+            // 从缓存中获取
             Boolean cacheResult = cacheStore
                 .putIfAbsent(cacheLockKey, CACHE_LOCK_VALUE, cacheLock.expired(),
                     cacheLock.timeUnit());
@@ -70,7 +70,7 @@ public class CacheLockInterceptor {
             // Proceed the method
             return joinPoint.proceed();
         } finally {
-            // Delete the cache
+            // 删除缓存
             if (cacheLock.autoDelete()) {
                 cacheStore.delete(cacheLockKey);
                 log.debug("Deleted the cache lock: [{}]", cacheLock);

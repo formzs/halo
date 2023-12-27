@@ -37,7 +37,7 @@ public class RecycledPostCleaningTask {
     }
 
     /**
-     * Clean recycled posts if RECYCLED_POST_CLEANING_ENABLED is true
+     * 如果RECYCLED_POST_CLEANING_ENABLED为true，则清理已回收的文章
      */
     @Scheduled(cron = "0 0 */1 * * ?")
     public synchronized void run() {
